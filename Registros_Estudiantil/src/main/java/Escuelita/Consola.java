@@ -2,24 +2,16 @@ package Escuelita;
 
 public class Consola {
     public static void main(String[] args) {
-        // creamos el estudiante
-        Estudiante estudiante = new Estudiante(1, "Juan","Perez",
-                1995-06-07, "Ingenieria Sistemas");
-        Materia calculo = new Materia(1, "Calculo I", 3);
+        Conexion conexion = Conexion.getInstance();
 
-        // === Estudiantes Inscritos ===
-        estudiante.inscribirMateria(calculo);
-
-        // == Notas agregadas ==
-        estudiante.agregarNota(calculo, new Notas(1, 80));
-
-        System.out.println("== Lista de estudiantes ==");
-        estudiante.mostrarListaEstudiante();
-
-        System.out.println("== Ver nota - Matria ==");
-        estudiante.verNotas(calculo);
-
-        System.out.println("== Calcular promedio - Materia ==");
-        System.out.println("promedio de calculo: " + estudiante.calcularPromedio(calculo));
+        if (conexion != null) {
+            System.out.println("Conexión exitosa a la base de datos");
+            // Aquí puedes realizar operaciones con la base de datos utilizando la conexión
+            // Por ejemplo:
+            // conexion.ejecutarSQL("INSERT INTO tabla (columna1, columna2) VALUES (valor1, valor2)");
+            // conexion.desconectar();
+        } else {
+            System.out.println("No se pudo establecer conexión a la base de datos");
+        }
     }
 }
