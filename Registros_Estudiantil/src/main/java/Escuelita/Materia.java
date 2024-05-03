@@ -16,8 +16,28 @@ public class Materia {
         this.notas = new ArrayList<>();
     }
 
+    public int getId_materia() {
+        return id_materia;
+    }
+
+    public void setId_materia(int id_materia) {
+        this.id_materia = id_materia;
+    }
+
     public String getNombre() {
         return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getCreditos() {
+        return creditos;
+    }
+
+    public void setCreditos(int creditos) {
+        this.creditos = creditos;
     }
 
     public void agregarNota(Notas nota) {
@@ -27,7 +47,8 @@ public class Materia {
     public void mostrarNotas() {
         System.out.println("Notas de la materia " + nombre + ":");
         for (Notas nota : notas) {
-            System.out.println("- " + nota.getPuntaje());
+            System.out.println("- " + nota.getPrimer_parcial() +
+                    " - " + nota.getSegundo_parcial() + " - " + nota.getExamen_final());
         }
     }
 
@@ -37,7 +58,7 @@ public class Materia {
         }
         float suma = 0;
         for (Notas nota : notas) {
-            suma += nota.getPuntaje();
+            suma += (nota.getPrimer_parcial() + nota.getSegundo_parcial() + nota.getExamen_final()) / 3;
         }
         return suma / notas.size();
     }

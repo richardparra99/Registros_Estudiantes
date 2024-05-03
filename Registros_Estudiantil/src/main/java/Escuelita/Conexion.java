@@ -7,48 +7,34 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Conexion {
-    private static Conexion conex;
-
-    // Nombre de la base de datos
-    private String database = "Escuelita";
-
-    // Host
-    private String hostname = "localhost"; // 127.0.0.1 == localhost
-
-    // Puerto
+    private String host = "localhost"; //127.0.0.1
     private String port = "5432";
-
-    // Ruta de nuestra base de datos (desactivamos el uso de SSL con "?useSSL=false")
-    private String url = "jdbc:postgresql://" + hostname + ":" + port + "/" + database;
-
-    // Nombre de usuario
+    private String database = "Escuelita";
     private String username = "postgres";
-
-    // Clave de usuario
     private String password = "root";
-
+    private String url = "jdbc:postgresql://" + host + ":" + port + "/" + database;
+    private static Conexion conexion;
     private Connection conn;
 
     public Conexion() {
         try {
             Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection(url, username, password);
-            JOptionPane.showMessageDialog(null, "Conexión PostgreSQL-Java exitosa", "Conexión", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Conexion postgreSQL-Java exitosa","Conexion",JOptionPane.INFORMATION_MESSAGE);
         } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Sin conexión", "Conexión" + e, JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Sin Conexion ","Conexion"+e, JOptionPane.ERROR_MESSAGE);
         }
     }
-
-
     public Connection getConnection() {
         return conn;
     }
 
     public static Conexion getInstance(){
-        if (conex == null){
-            conex = new Conexion();
+        if (conexion == null){
+            conexion = new Conexion();
         }
-        return conex;
+        return conexion;
     }
 
 
@@ -70,6 +56,4 @@ public class Conexion {
             throw new RuntimeException(e);
         }
     }
-
-    //
 }
